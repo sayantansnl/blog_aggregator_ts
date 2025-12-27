@@ -2,7 +2,7 @@ import { setUser } from "./config.js";
 import { createUser } from "./lib/db/queries/users.js";
 
 export async function handlerRegister(cmdName: string, ...args: string[]) {
-  if (args.length != 1) {
+  if (args.length !== 1) {
     throw new Error(`usage: ${cmdName} <name>`);
   }
 
