@@ -1,10 +1,17 @@
 import { setUser } from "./config.js";
+import { getUser } from "./lib/db/queries/users.js";
 
-export function handlerLogin(cmdName: string, ...args: string[]) {
-    if (!args.length) {
-        throw new Error("the login handler expects a single argument");
-    }
+export async function handlerLogin(cmdName: string, ...args: string[]) {
+  if (args.length !== 1) {
+    throw new Error(`usage: ${cmdName} <name>`);
+  }
 
-    setUser(args[0]);
-    console.log("User has been set.");
+  const userName = args[0];
+  const existingUser = await getUser(userName);
+  if (!existingUser) {
+    throw new Error(`User ${userName} not found`);
+  }
+
+  setUser(existingUser.name);
+  console.log("User switched successfully!");
 }

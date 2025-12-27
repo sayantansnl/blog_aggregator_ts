@@ -9,16 +9,16 @@ export function registerCommand(
     registry[cmdName] = handler;
 }
 
-export function runCommand(
+export async function runCommand(
     registry: CommandRegistry,
     cmdName: string,
     ...args: string[]
-) {
+): Promise<void> {
     if (!args.length) {
         console.log("Not enough arguments to run said command.");
         process.exit(1);
     }
 
     const handler = registry[cmdName];
-    handler(cmdName, ...args);
+    await handler(cmdName, ...args);
 }
