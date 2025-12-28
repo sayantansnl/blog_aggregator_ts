@@ -1,5 +1,4 @@
 import { CommandHandler, CommandRegistry } from "./types.js";
-import process from "node:process";
 
 export function registerCommand(
     registry: CommandRegistry,
