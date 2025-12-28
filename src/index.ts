@@ -1,5 +1,6 @@
 import { handlerLogin } from "./handlerLogin.js";
 import { handlerRegister } from "./handlerRegister.js";
+import { handlerReset } from "./handlerReset.js";
 import { registerCommand, runCommand } from "./registerAndRun.js";
 import { CommandRegistry } from "./types.js";
 
@@ -12,6 +13,7 @@ async function main() {
 
     registerCommand(commands, "login", handlerLogin);
     registerCommand(commands, "register", handlerRegister);
+    registerCommand(commands, "reset", handlerReset);
     
     try {
         await runCommand(commands, commandName, ...commandArgs);

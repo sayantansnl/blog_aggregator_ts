@@ -14,11 +14,6 @@ export async function runCommand(
     cmdName: string,
     ...args: string[]
 ): Promise<void> {
-    if (!args.length) {
-        console.log("Not enough arguments to run said command.");
-        process.exit(1);
-    }
-
     const handler = registry[cmdName];
     await handler(cmdName, ...args);
 }
