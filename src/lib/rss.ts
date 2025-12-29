@@ -1,4 +1,5 @@
 import { XMLParser } from "fast-xml-parser"; 
+import { RSSFeed, RSSItem } from "../types.js";
 
 export async function fetchFeed(url: string) {
     try {
@@ -11,41 +12,50 @@ export async function fetchFeed(url: string) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.text();
+        const xml = await response.text();
         
         const parser = new XMLParser();
-        let jsObj = parser.parse(data);
+        let jsObj = parser.parse(xml);
 
         if (!("channel" in jsObj.rss)) {
             throw new Error("Doesn't include a channel field");
         }
 
-        const channel = jsObj.rss.channel;
+        const channel = jsObj.rss?.channel;
+
+        if (!channel) {
+            throw new Error("Failed to parse channel");
+        }
 
         const title = channel?.title;
         const link = channel?.link;
         const description = channel?.description;
         let item = Array.isArray(channel?.item)? channel?.item : [];
 
-        let cleanedItems = item.filter((el) => el.title && el.link && el.description && el.pubDate);
-        let finalItems = cleanedItems.map((el) => {
-            return {
-                title: el.title,
-                link: el.link,
-                description: el.description,
-                pubDate: el.pubDate
-            };
-        });
-        
-        const result = {
+        const rssItems: RSSItem[] = [];
+
+        for (const i of item) {
+            if (!i.title || !i.link || !i.description || !i.pubDate) {
+                continue;
+            }
+
+            rssItems.push({
+                title: i.title,
+                link: i.link,
+                description: i.description,
+                pubDate: i.pubDate
+            });
+        }
+
+        const feed: RSSFeed = {
             channel: {
                 title: title,
                 link: link,
                 description: description,
-                item: finalItems
+                item: rssItems
             }
         };
-        return result;
+        return feed;
     } catch (err) {
         console.log((err as Error).message);
     }
