@@ -1,3 +1,4 @@
+import { handlerAgg } from "./handlerAgg.js";
 import { handlerGetUsers } from "./handlerGetUsers.js";
 import { handlerLogin } from "./handlerLogin.js";
 import { handlerRegister } from "./handlerRegister.js";
@@ -16,6 +17,7 @@ async function main() {
     registerCommand(commands, "register", handlerRegister);
     registerCommand(commands, "reset", handlerReset);
     registerCommand(commands, "users", handlerGetUsers);
+    registerCommand(commands, "agg", handlerAgg);
     
     try {
         await runCommand(commands, commandName, ...commandArgs);
