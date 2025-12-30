@@ -1,5 +1,6 @@
 import { handlerAddFeed } from "./handlerAddFeed.js";
 import { handlerAgg } from "./handlerAgg.js";
+import { handlerFeeds } from "./handlerFeeds.js";
 import { handlerGetUsers } from "./handlerGetUsers.js";
 import { handlerLogin } from "./handlerLogin.js";
 import { handlerRegister } from "./handlerRegister.js";
@@ -20,6 +21,7 @@ async function main() {
     registerCommand(commands, "users", handlerGetUsers);
     registerCommand(commands, "agg", handlerAgg);
     registerCommand(commands, "addfeed", handlerAddFeed);
+    registerCommand(commands, "feeds", handlerFeeds);
     
     try {
         await runCommand(commands, commandName, ...commandArgs);
