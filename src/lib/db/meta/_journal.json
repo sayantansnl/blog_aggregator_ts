@@ -15,6 +15,20 @@
       "when": 1767074271706,
       "tag": "0001_true_xavin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1767154926837,
+      "tag": "0002_abandoned_kree",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1767164493991,
+      "tag": "0003_groovy_brother_voodoo",
+      "breakpoints": true
     }
   ]
 }

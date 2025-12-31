@@ -1,5 +1,5 @@
 import { InferSelectModel } from "drizzle-orm";
-import { feeds, users } from "./lib/db/schema";
+import { feedFollows, feeds, users } from "./lib/db/schema";
 
 export type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
 
@@ -23,3 +23,4 @@ export type RSSItem = {
 
 export type User = InferSelectModel<typeof users>;
 export type Feed = InferSelectModel<typeof feeds>;
+//export type FeedFollow = InferSelectModel<typeof feedFollows>;
