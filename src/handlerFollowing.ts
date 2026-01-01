@@ -1,6 +1,4 @@
-import { readConfig } from "./config.js";
 import { getFeedFollowsForUser } from "./lib/db/queries/feedFollows";
-import { getUser } from "./lib/db/queries/users.js";
 import { User } from "./types.js";
 
 export async function handlerFollowing(cmdName: string, user: User, ...args: string[]) {

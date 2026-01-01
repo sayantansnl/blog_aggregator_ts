@@ -1,6 +1,4 @@
-import { readConfig } from "./config.js";
 import { getFeedByUrl } from "./lib/db/queries/feeds.js";
-import { getUser } from "./lib/db/queries/users.js";
 import { Feed, User } from "./types.js";
 import { createFeedFollow } from "./lib/db/queries/feedFollows.js";
 
