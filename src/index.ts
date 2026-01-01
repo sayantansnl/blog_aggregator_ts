@@ -7,6 +7,7 @@ import { handlerGetUsers } from "./handlerGetUsers.js";
 import { handlerLogin } from "./handlerLogin.js";
 import { handlerRegister } from "./handlerRegister.js";
 import { handlerReset } from "./handlerReset.js";
+import { middlewareLoggedIn } from "./middleware.js";
 import { registerCommand, runCommand } from "./registerAndRun.js";
 import { CommandRegistry } from "./types.js";
 
@@ -22,10 +23,10 @@ async function main() {
     registerCommand(commands, "reset", handlerReset);
     registerCommand(commands, "users", handlerGetUsers);
     registerCommand(commands, "agg", handlerAgg);
-    registerCommand(commands, "addfeed", handlerAddFeed);
+    registerCommand(commands, "addfeed", middlewareLoggedIn(handlerAddFeed));
     registerCommand(commands, "feeds", handlerFeeds);
-    registerCommand(commands, "follow", handlerFollow);
-    registerCommand(commands, "following", handlerFollowing);
+    registerCommand(commands, "follow", middlewareLoggedIn(handlerFollow));
+    registerCommand(commands, "following", middlewareLoggedIn(handlerFollowing));
     
     try {
         await runCommand(commands, commandName, ...commandArgs);
